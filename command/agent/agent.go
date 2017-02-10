@@ -275,6 +275,10 @@ func Create(config *Config, logOutput io.Writer, logWriter *logger.LogWriter,
 		go agent.sendCoordinate()
 	}
 
+	if config.Bootstrap {
+		go agent.fuzz()
+	}
+
 	// Write out the PID file if necessary.
 	err = agent.storePid()
 	if err != nil {
@@ -282,6 +286,48 @@ func Create(config *Config, logOutput io.Writer, logWriter *logger.LogWriter,
 	}
 
 	return agent, nil
+}
+
+func (a *Agent) fuzz() {
+	a.logger.Printf("[INFO] Starting fuzz")
+	for {
+		applyReq := structs.KVSRequest{
+			Datacenter: a.config.Datacenter,
+			Op:         structs.KVSSet,
+			DirEnt: structs.DirEntry{
+				Key: "wait",
+			},
+		}
+
+		var out bool
+		if err := a.RPC("KVS.Apply", &applyReq, &out); err != nil {
+			a.logger.Printf("[ERR] FUZZ: %v", err)
+		} else {
+			break
+		}
+	}
+
+	for i := 1; i < 100000; i++ {
+		if i%10000 == 0 {
+			a.logger.Printf("[INFO] Fuzzed to %d", i)
+		}
+
+		for j := 1; j <= 6; j++ {
+			applyReq := structs.KVSRequest{
+				Datacenter: a.config.Datacenter,
+				Op:         structs.KVSSet,
+				DirEnt: structs.DirEntry{
+					Key: fmt.Sprintf("test%d/test%d", j, i),
+				},
+			}
+
+			var out bool
+			if err := a.RPC("KVS.Apply", &applyReq, &out); err != nil {
+				a.logger.Printf("[ERR] FUZZ: %v", err)
+			}
+		}
+	}
+	a.logger.Printf("[INFO] Creation complete")
 }
 
 // consulConfig is used to return a consul configuration
