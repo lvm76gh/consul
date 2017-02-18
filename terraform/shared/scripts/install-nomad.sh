@@ -1,26 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Installing dependencies..."
-if [ -x "$(command -v apt-get)" ]; then
-  sudo apt-get update -y
-  sudo apt-get install -y unzip
-else
-  sudo yum update -y
-  sudo yum install -y unzip wget
-fi
-
-
-echo "Fetching Consul..."
-CONSUL=0.7.0
+echo "Fetching Nomad..."
+Nomad=0.5.4
 cd /tmp
-wget https://releases.hashicorp.com/consul/${CONSUL}/consul_${CONSUL}_linux_amd64.zip -O consul.zip
+wget https://releases.hashicorp.com/nomad/${NOMAL}/nomad_${NOMAD}_linux_amd64.zip -O nomad.zip
 
-echo "Installing Consul..."
-unzip consul.zip >/dev/null
-chmod +x consul
-sudo mv consul /usr/local/bin/consul
-sudo mkdir -p /opt/consul/data
+echo "Installing Nomad..."
+unzip nomad.zip >/dev/null
+chmod +x nomad
+sudo mv nomad /usr/local/bin/nomad
+sudo mkdir -p /opt/nomad/data
 
 # Read from the file we created
 SERVER_COUNT=$(cat /tmp/consul-server-count | tr -d '\n')
