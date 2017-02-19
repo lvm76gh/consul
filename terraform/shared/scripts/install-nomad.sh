@@ -4,7 +4,7 @@ set -e
 echo "Fetching Nomad..."
 NOMAD=0.5.4
 cd /tmp
-wget https://releases.hashicorp.com/nomad/${NOMAL}/nomad_${NOMAD}_linux_amd64.zip -O nomad.zip
+wget https://releases.hashicorp.com/nomad/${NOMAD}/nomad_${NOMAD}_linux_amd64.zip -O nomad.zip
 
 echo "Installing Nomad..."
 unzip nomad.zip >/dev/null
