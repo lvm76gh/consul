@@ -17,19 +17,23 @@ CONSUL_JOIN=$(cat /tmp/consul-server-addr | tr -d '\n')
 
 # Write the flags to a temporary file
 cat >/tmp/nomad_flags << EOF
-CONSUL_FLAGS="-server -bootstrap-expect=${SERVER_COUNT} -join=${CONSUL_JOIN} -data-dir=/opt/consul/data"
+NOMAD_FLAGS="-config=/etc/nomad.d/server.hcl"
 EOF
 
-#if [ -f /tmp/upstart.conf ];
+
+#if [ -f /tmp/debian_nomad_upstart.conf ];
 #then
   echo "Installing Nomad  Upstart service..."
   sudo mkdir -p /etc/nomad.d
-  sudo touch /etc/nomad.d/server.hcl
-#  sudo chown root:root /tmp/upstart.conf
-#  sudo mv /tmp/upstart.conf /etc/init/consul.conf
-#  sudo chmod 0644 /etc/init/consul.conf
-#  sudo mv /tmp/consul_flags /etc/service/consul
-#  sudo chmod 0644 /etc/service/consul
+
+# Write server.hcl file
+  echo "server { enabled=true bootstrap_expect=3 }" > /etc/nomad.d/server.hcl
+
+  sudo chown root:root /tmp/nomad.conf
+  sudo mv /tmp/nomad.conf /etc/init/
+  sudo chmod 0644 /etc/init/nomad.conf
+  sudo mv /tmp/nomad_flags /etc/service/nomad
+  sudo chmod 0644 /etc/service/nomad
 #else
 #  echo "Installing Systemd service..."
 #  sudo mkdir -p /etc/systemd/system/consul.d
