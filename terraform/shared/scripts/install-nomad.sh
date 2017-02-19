@@ -34,6 +34,7 @@ EOF
   sudo chmod 0644 /etc/init/nomad.conf
   sudo mv /tmp/nomad_flags /etc/service/nomad
   sudo chmod 0644 /etc/service/nomad
+
 #else
 #  echo "Installing Systemd service..."
 #  sudo mkdir -p /etc/systemd/system/consul.d
