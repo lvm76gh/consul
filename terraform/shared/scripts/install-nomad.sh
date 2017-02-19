@@ -27,7 +27,7 @@ EOF
   sudo mkdir -p /etc/nomad.d
 
 # Write server.hcl file
-  echo "server { enabled=true bootstrap_expect=3 }" > /etc/nomad.d/server.hcl
+  sudo echo "server { enabled=true bootstrap_expect=3 }" > /etc/nomad.d/server.hcl
 
   sudo chown root:root /tmp/nomad.conf
   sudo mv /tmp/nomad.conf /etc/init/
