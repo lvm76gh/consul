@@ -23,7 +23,7 @@ EOF
 
 #if [ -f /tmp/debian_nomad_upstart.conf ];
 #then
-  echo "Installing Nomad  Upstart service..."
+  echo "Installing Nomad Upstart service..."
   sudo mkdir -p /etc/nomad.d
 
 # Write server.hcl file
@@ -31,9 +31,19 @@ EOF
 server { enabled=true bootstrap_expect=3 } 
 EOF
 
+# Write client.hcl file
+  cat >/tmp/client.hcl << EOF  
+datacenter = "dc1"
+client { enabled=true } 
+EOF
+
   sudo mv /tmp/server.hcl /etc/nomad.d
   sudo chown root:root /etc/nomad.d/server.hcl
   sudo chmod 0644 /etc/nomad.d/server.hcl
+ 
+  sudo mv /tmp/client.hcl /etc/nomad.d
+  sudo chown root:root /etc/nomad.d/client.hcl
+  sudo chmod 0644 /etc/nomad.d/client.hcl
 
   sudo mv /tmp/debian_nomad_upstart.conf /etc/init/nomad.conf
   sudo chown root:root /etc/init/nomad.conf
