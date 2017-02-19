@@ -21,6 +21,9 @@ cat >/tmp/nomad_flags << EOF
 NOMAD_FLAGS="-config=/etc/nomad.d/server.hcl -data-dir=/opt/nomad/data"
 EOF
 
+cat >/tmp/nomad_client_flags << EOF
+NOMAD_CLIENT_FLAGS="-config=/etc/nomad.d/client.hcl"
+EOF
 
 #if [ -f /tmp/debian_nomad_upstart.conf ];
 #then
