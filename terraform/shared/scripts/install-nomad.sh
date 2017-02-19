@@ -35,8 +35,8 @@ EOF
   sudo chown root:root /etc/nomad.d/server.hcl
   sudo chmod 0644 /etc/nomad.d/server.hcl
 
-  sudo chown root:root /tmp/debian_nomad_upstart.conf
   sudo mv /tmp/debian_nomad.upstart.conf /etc/init/nomad.conf
+  sudo chown root:root /tmp/debian_nomad_upstart.conf
   sudo chmod 0644 /etc/init/nomad.conf
   sudo mv /tmp/nomad_flags /etc/service/nomad
   sudo chmod 0644 /etc/service/nomad
