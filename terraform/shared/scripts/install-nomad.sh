@@ -10,6 +10,7 @@ echo "Installing Nomad..."
 unzip nomad.zip >/dev/null
 chmod +x nomad
 sudo mv nomad /usr/local/bin/nomad
+sudo mkdir -p /opt/nomad/data
 
 # Read from the file we created
 SERVER_COUNT=$(cat /tmp/consul-server-count | tr -d '\n')
@@ -17,7 +18,7 @@ CONSUL_JOIN=$(cat /tmp/consul-server-addr | tr -d '\n')
 
 # Write the flags to a temporary file
 cat >/tmp/nomad_flags << EOF
-NOMAD_FLAGS="-config=/etc/nomad.d/server.hcl"
+NOMAD_FLAGS="-config=/etc/nomad.d/server.hcl -data-dir=/opt/nomad/data"
 EOF
 
 
