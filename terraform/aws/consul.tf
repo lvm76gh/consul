@@ -21,6 +21,11 @@ resource "aws_instance" "server" {
         destination = "/tmp/${lookup(var.service_conf_dest, var.platform)}"
     }
 
+    # Add nomad start services
+    provisioner "file" {
+        source = "${path.module}/../shared/scripts/debian_nomad_upstart.conf}"
+        destination = "/tmp/debian_nomad_upstart}"
+    }
 
     provisioner "remote-exec" {
         inline = [
