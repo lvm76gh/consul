@@ -66,8 +66,6 @@ resource "aws_security_group" "consul" {
 
     ingress {
         protocol = "icmp"
-        from_port = ICMP
-        to_port = ICMP
         self = true
     }
 
