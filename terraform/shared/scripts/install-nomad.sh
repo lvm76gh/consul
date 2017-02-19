@@ -2,7 +2,7 @@
 set -e
 
 echo "Fetching Nomad..."
-NOMAD=0.5.4
+NOMAD="0.5.4"
 cd /tmp
 wget https://releases.hashicorp.com/nomad/${NOMAD}/nomad_${NOMAD}_linux_amd64.zip -O nomad.zip
 
