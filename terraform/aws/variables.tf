@@ -45,6 +45,7 @@ variable "ami" {
 variable "service_conf" {
   default = {
     ubuntu  = "debian_upstart.conf"
+    ubuntu  = "debian_nomad_upstart.conf"
     rhel6   = "rhel_upstart.conf"
     centos6 = "rhel_upstart.conf"
     centos7 = "rhel_consul.service"
@@ -55,6 +56,7 @@ variable "service_conf" {
 variable "service_conf_dest" {
   default = {
     ubuntu  = "upstart.conf"
+    ubuntu  = "debian_nomad_upstart.conf"
     rhel6   = "upstart.conf"
     centos6 = "upstart.conf"
     centos7 = "consul.service"
