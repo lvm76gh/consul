@@ -22,7 +22,7 @@ NOMAD_FLAGS="-config=/etc/nomad.d/server.hcl -data-dir=/opt/nomad/data"
 EOF
 
 cat >/tmp/nomad_client_flags << EOF
-NOMAD_CLIENT_FLAGS="-config=/etc/nomad.d/client.hcl"
+NOMAD_CLIENT_FLAGS="-config=/etc/nomad.d/client.hcl -data-dir=/opt/nomad/data"
 EOF
 
 #if [ -f /tmp/debian_nomad_upstart.conf ];
@@ -39,6 +39,7 @@ EOF
   cat >/tmp/client.hcl << EOF  
 datacenter = "dc1"
 client { enabled=true } 
+port { http=5656 }
 EOF
 
   sudo mv /tmp/server.hcl /etc/nomad.d
