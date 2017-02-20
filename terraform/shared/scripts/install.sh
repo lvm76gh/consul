@@ -31,6 +31,8 @@ cat >/tmp/consul_flags << EOF
 CONSUL_FLAGS="-server -bootstrap-expect=${SERVER_COUNT} -join=${CONSUL_JOIN} -data-dir=/opt/consul/data"
 EOF
 
+
+
 if [ -f /tmp/upstart.conf ];
 then
   echo "Installing Upstart service..."
@@ -51,3 +53,13 @@ else
   sudo chown root:root /etc/sysconfig/consul
   sudo chmod 0644 /etc/sysconfig/consul
 fi
+
+# Write service description File for Redis Cluster
+cat >/tmp/redis.json << EOF
+{"service": {"name": "redis", "tags": ["redis"], "port": 6379}}
+EOF
+
+sudo mv /tmp/redis.json /etc/consul.d/
+sudo chown root:root /etc/consul.d/redis.json
+sudo chmod 0644 /etc/consul.d/redis.json
+
