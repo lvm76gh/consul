@@ -42,6 +42,7 @@ resource "aws_instance" "server" {
             "${path.module}/../shared/scripts/service-nomad.sh",
             "${path.module}/../shared/scripts/install-redis.sh",
             "${path.module}/../shared/scripts/ip_tables.sh",
+            "${path.module}/../shared/scripts/start-redis.sh",
         ]
     }
 }
