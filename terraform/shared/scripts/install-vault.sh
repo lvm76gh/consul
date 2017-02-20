@@ -12,6 +12,8 @@ chmod +x vault
 sudo mv vault /usr/local/bin/vault
 sudo mkdir -p /opt/vault/data
 
+echo "export VAULT_ADDR=http://127.0.0.1:8200" | sudo tee --append /etc/environment
+
 # Read from the file we created
 SERVER_COUNT=$(cat /tmp/consul-server-count | tr -d '\n')
 CONSUL_JOIN=$(cat /tmp/consul-server-addr | tr -d '\n')
