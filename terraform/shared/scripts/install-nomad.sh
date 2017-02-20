@@ -60,8 +60,8 @@ EOF
   sudo mv /tmp/nomad_flags /etc/service/nomad
   sudo chmod 0644 /etc/service/nomad
 
-  sudo mv /tmp/nomad_client_flags /etc/service/nomad_client
-  sudo chmod 0644 /etc/service/nomad_client
+  sudo mv /tmp/nomad_client_flags /etc/service/nomad-client
+  sudo chmod 0644 /etc/service/nomad-client
 #else
 #  echo "Installing Systemd service..."
 #  sudo mkdir -p /etc/systemd/system/consul.d
