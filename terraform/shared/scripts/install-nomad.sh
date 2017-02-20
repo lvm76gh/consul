@@ -39,7 +39,7 @@ EOF
   cat >/tmp/client.hcl << EOF  
 datacenter = "dc1"
 client { enabled=true } 
-port { http=5656 }
+ports { http=5656 }
 EOF
 
   sudo mv /tmp/server.hcl /etc/nomad.d
