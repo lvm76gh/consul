@@ -18,7 +18,7 @@ CONSUL_JOIN=$(cat /tmp/consul-server-addr | tr -d '\n')
 
 # Write the flags to a temporary file
 cat >/tmp/vault_flags << EOF
-VAULT_FLAGS="-config=/etc/vault.d/vaultserver.hcl"
+VAULT_FLAGS="-config=/etc/vault.d/vault.hcl"
 EOF
 
 
