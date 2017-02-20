@@ -42,6 +42,8 @@ client { enabled=true }
 ports { http=5656 }
 EOF
 
+
+echo "Injecting Nomad Startup Services..."
   sudo mv /tmp/server.hcl /etc/nomad.d
   sudo chown root:root /etc/nomad.d/server.hcl
   sudo chmod 0644 /etc/nomad.d/server.hcl

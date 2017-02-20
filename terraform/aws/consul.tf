@@ -32,6 +32,11 @@ resource "aws_instance" "server" {
         source = "${path.module}/../shared/scripts/debian_nomad_client_upstart.conf"
         destination = "/tmp/debian_nomad_client_upstart.conf"
     }
+    # Add vault start services
+    provisioner "file" {
+        source = "${path.module}/../shared/scripts/debian_vault_upstart.conf"
+        destination = "/tmp/debian_vault_upstart.conf"
+    }
 
     provisioner "remote-exec" {
         inline = [
@@ -44,12 +49,14 @@ resource "aws_instance" "server" {
         scripts = [
             "${path.module}/../shared/scripts/install.sh",
             "${path.module}/../shared/scripts/install-nomad.sh",
+            "${path.module}/../shared/scripts/install-vault.sh",
             "${path.module}/../shared/scripts/service.sh",
             "${path.module}/../shared/scripts/service-nomad.sh",
             "${path.module}/../shared/scripts/service-nomad-client.sh",
-            "${path.module}/../shared/scripts/install-redis.sh",
+#           "${path.module}/../shared/scripts/install-docker.sh",
+            "${path.module}/../shared/scripts/service-vault.sh",
             "${path.module}/../shared/scripts/ip_tables.sh",
-            "${path.module}/../shared/scripts/start-redis.sh",
+            "${path.module}/../shared/scripts/init-nomad.sh",
         ]
     }
 }
