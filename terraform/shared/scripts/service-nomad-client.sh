@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Starting Nomad..."
+echo "Starting Nomad Client..."
 if [ -x "$(command -v systemctl)" ]; then
   echo "using systemctl"
   sudo systemctl enable nomad.service
