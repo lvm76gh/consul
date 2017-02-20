@@ -27,6 +27,12 @@ resource "aws_instance" "server" {
         destination = "/tmp/debian_nomad_upstart.conf"
     }
 
+    # Add nomad client start services
+    provisioner "file" {
+        source = "${path.module}/../shared/scripts/debian_nomad_client_upstart.conf"
+        destination = "/tmp/debian_nomad_client_upstart.conf"
+    }
+
     provisioner "remote-exec" {
         inline = [
             "echo ${var.servers} > /tmp/consul-server-count",
@@ -40,6 +46,7 @@ resource "aws_instance" "server" {
             "${path.module}/../shared/scripts/install-nomad.sh",
             "${path.module}/../shared/scripts/service.sh",
             "${path.module}/../shared/scripts/service-nomad.sh",
+            "${path.module}/../shared/scripts/service-nomad-client.sh",
             "${path.module}/../shared/scripts/install-redis.sh",
             "${path.module}/../shared/scripts/ip_tables.sh",
             "${path.module}/../shared/scripts/start-redis.sh",

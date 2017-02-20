@@ -53,6 +53,10 @@ EOF
   sudo mv /tmp/debian_nomad_upstart.conf /etc/init/nomad.conf
   sudo chown root:root /etc/init/nomad.conf
   sudo chmod 0644 /etc/init/nomad.conf
+  sudo mv /tmp/debian_nomad_client_upstart.conf /etc/init/nomad-client.conf
+  sudo chown root:root /etc/init/nomad-client.conf
+  sudo chmod 0644 /etc/init/nomad-client.conf
+
   sudo mv /tmp/nomad_flags /etc/service/nomad
   sudo chmod 0644 /etc/service/nomad
 
