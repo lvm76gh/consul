@@ -23,7 +23,8 @@ cat >/tmp/vault_flags << EOF
 VAULT_FLAGS="-config=/etc/vault.d/vault.hcl"
 EOF
 
-
+# Discover IP
+DIP=`ifconfig | awk '/inet addr/{print substr($2,6)}'| head -n1`
 #if [ -f /tmp/debian_vault_upstart.conf ];
 #then
   echo "Installing Nomad Upstart service..."
@@ -36,6 +37,11 @@ backend "consul" {
   path = "vault"
 }
 
+
+listener "tcp" {
+ address = "$DIP:8200"
+ tls_disable = 1
+}
 listener "tcp" {
  address = "127.0.0.1:8200"
  tls_disable = 1
