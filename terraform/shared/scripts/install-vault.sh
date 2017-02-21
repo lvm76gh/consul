@@ -24,7 +24,7 @@ VAULT_FLAGS="-config=/etc/vault.d/vault.hcl"
 EOF
 
 # Discover IP
-DIP=`ifconfig | awk '/inet addr/{print substr($2,6)}'| head -n1`
+DIP=`ifconfig | grep  -n1 eth0  | awk '/inet addr/{print substr($3,6)}'`
 #if [ -f /tmp/debian_vault_upstart.conf ];
 #then
   echo "Installing Nomad Upstart service..."
